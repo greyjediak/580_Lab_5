@@ -129,6 +129,8 @@ module tb_fifo_buffer;
         end
         rd_en4 = 0;
         wr_en5 = 0;
+        check(empty_1 === 1, "DUT1 should be empty after reading all words");
+        check(full_1 === 0, "DUT1 should not be full");
         rd_en5 = 1;
         for (int i = 0; i < DEPTH5-1; i++) begin
             @(posedge clk); #1;
@@ -137,6 +139,19 @@ module tb_fifo_buffer;
         rd_en5 = 0;
         wr_en5 = 0;
     // pointer wraparound
+    /* Test 5: Attempt to read from an empty FIFO */
+        $display("Test 5");
+
+        wr_en4 = 0;
+        rd_en4 = 1;
+
+        @(posedge clk); #1;
+
+        check(empty_1 === 1, "DUT1 should remain empty after invalid read");
+        check(full_1 === 0, "DUT1 should not be full after invalid read");
+
+        rd_en4 = 0;
+        test_cnt++;
     // Transition from empty to nonempty
     // transition from not-full to full
     // transition from full to not full
