@@ -2,7 +2,7 @@
 // 
 
 
-module fifo_buffer#(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
+module fifo_buffer #(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
     input logic clk,
     input logic rst,
     input logic wr_en,
@@ -15,7 +15,7 @@ module fifo_buffer#(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
     
     localparam COUNT_W = $clog2(DEPTH +1); //represent every value from 0 through DEPTH
     localparam ADDR_WIDTH = $clog2(DEPTH);
-    logic [COUNT_W:0] count; // occupancy count must be capable of representing 0->DEPTH
+    logic [COUNT_W-1:0] count, count_next; // occupancy count must be capable of representing 0->DEPTH
     logic [ADDR_WIDTH-1:0]write_ptr, write_ptr_next, write_ptr_succ;
     logic [ADDR_WIDTH-1:0] rd_ptr, rd_ptr_next, rd_ptr_succ;
     
@@ -28,16 +28,14 @@ module fifo_buffer#(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
     assign read = rd_en && !empty;
     
     // observers
-    output logic [COUNT_W-1:0] level;
-    input logic [COUNT_W-1:0] almost_full_threshold;
     
     ram #(.WIDTH(WIDTH), .DEPTH(DEPTH), .ADDR_WIDTH(ADDR_WIDTH))ram_mod (
         .clk(clk),
         .rst(rst),
-        .wr_en(wr_en),
+        .wr_en(write),
         .wr_addr(write_ptr),
         .wr_data(wr_data),
-        .rd_en(rd_en),
+        .rd_en(read),
         .rd_addr(rd_ptr),
         .rd_data(rd_data)
     );
@@ -65,6 +63,11 @@ module fifo_buffer#(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
             rd_ptr_succ = '0;
         else
             rd_ptr_succ = rd_ptr + 1;
+            
+        if (write && !read) // accepted writes increase occupancy unless a valid read also happens
+            count = count + 1;
+        else if (read && !write)
+            count = count -1;
         
         // default: keep old vals
         write_ptr_next = write_ptr;

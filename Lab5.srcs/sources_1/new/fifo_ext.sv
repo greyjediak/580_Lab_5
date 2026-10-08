@@ -2,7 +2,7 @@
 // 
 
 
-module fifo_buffer#(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
+module fifo_ext#(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
     input logic clk,
     input logic rst,
     input logic wr_en,
@@ -10,7 +10,10 @@ module fifo_buffer#(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
     input logic rd_en,
     output logic [WIDTH-1:0] rd_data,
     output logic empty,
-    output logic full
+    output logic full,
+    
+    output logic [COUNT_W-1:0] level,
+    input logic [COUNT_W-1:0] almost_full_threshold
     );
     
     localparam COUNT_W = $clog2(DEPTH +1); //represent every value from 0 through DEPTH
@@ -58,7 +61,7 @@ module fifo_buffer#(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
         if (write_ptr == DEPTH-1)
             write_ptr_succ = '0;
         else
-            write_ptr_succ = write_ptr + 1;
+            write_ptr_succ = write_ptr + 1; // advance write_ptr
             
         if (rd_ptr == DEPTH-1)
             rd_ptr_succ = '0;
