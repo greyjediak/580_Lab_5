@@ -17,3 +17,4 @@ lab5_report.pdf
 constr/Basys-3-Master.xdc //constraints file for this project
 
 ## AI Disclosure and Overview
+Claude was used to write this README based off of my own READMEs from previous labs. No AI was used to generate the lab report, figures, or solutions.
