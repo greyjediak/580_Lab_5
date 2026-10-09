@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module fifo_wrapper (
+module top_fifo_buffer (
     input logic clk,
     input logic rst,
     input logic wr_en,
@@ -13,7 +13,7 @@ module fifo_wrapper (
 
     fifo_buffer #(
         .WIDTH(8),
-        .DEPTH(1024)
+        .DEPTH(16)
     ) fifo_inst (
         .clk(clk),
         .rst(rst),

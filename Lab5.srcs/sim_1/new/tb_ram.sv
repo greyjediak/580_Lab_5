@@ -2,13 +2,6 @@
 // "It is a universal truth that, a single man in possession of a good fortune must be in want of a wife."
 //  - Jane Austen, Pride and Prejudice
 
-// Data values are chosen so they can be read directly in the waveform (hex):
-//   dut 1 (8-bit): first letter = which write, second digit = address
-//       initial fill: address i holds 8'hAi  (A0, A1, ... A7)
-//       Test 6 write: 8'hB4, Test 7 write: 8'hC2, Test 8 write: 8'hD4
-//   dut 2 (4-bit): initial fill: address i holds i  (0, 1, ... F)
-//       Test 6 write: 4'hB, Test 7 write: 4'hC, Test 8 write: 4'hD  (same letters as dut 1)
-
 module tb_ram;
     logic clk, rst, wr_en, rd_en;
     logic [$clog2(8)-1:0] wr_addr8, rd_addr8;

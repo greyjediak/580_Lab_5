@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
 
-module ram_wrapper #(
+module top_ram #(
     parameter int WIDTH = 8,
-    parameter int DEPTH = 16,
+    parameter int DEPTH = 1024,
     parameter int ADDR_W = $clog2(DEPTH)
 )(
     input logic clk,

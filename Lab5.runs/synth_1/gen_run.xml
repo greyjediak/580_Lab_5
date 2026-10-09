@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1791504829" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/fifo_wrapper.dcp">
-  <File Type="PA-TCL" Name="fifo_wrapper.tcl"/>
-  <File Type="REPORTS-TCL" Name="fifo_wrapper_reports.tcl"/>
-  <File Type="RDS-RDS" Name="fifo_wrapper.vds"/>
-  <File Type="RDS-PROPCONSTRS" Name="fifo_wrapper_drc_synth.rpt"/>
-  <File Type="RDS-UTIL" Name="fifo_wrapper_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="fifo_wrapper_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="fifo_wrapper.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="fifo_wrapper_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="fifo_wrapper_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1791509891" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/fifo_wrapper.dcp">
+  <File Type="PA-TCL" Name="top_fifo_ext.tcl"/>
+  <File Type="REPORTS-TCL" Name="top_fifo_ext_reports.tcl"/>
+  <File Type="RDS-RDS" Name="top_fifo_ext.vds"/>
+  <File Type="RDS-PROPCONSTRS" Name="top_fifo_ext_drc_synth.rpt"/>
+  <File Type="RDS-UTIL" Name="top_fifo_ext_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="top_fifo_ext_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="top_fifo_ext.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="top_fifo_ext_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="top_fifo_ext_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/fifo_buffer.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/top_fifo_buffer.sv">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/top_ram.sv">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
@@ -20,14 +36,6 @@
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/fifo_ext.sv">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/new/fifo_buffer.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -41,7 +49,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/top_fifo_buffer.sv">
+    <File Path="$PSRCDIR/sources_1/new/top_fifo_ext.sv">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -50,7 +58,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="fifo_wrapper"/>
+      <Option Name="TopModule" Val="top_fifo_ext"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

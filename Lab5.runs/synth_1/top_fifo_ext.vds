@@ -1,17 +1,26 @@
-
-*** Running vivado
-    with args -log top_fifo_ext.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_fifo_ext.tcl
-
-
-
-****** Vivado v2025.2 (64-bit)
-  **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
-  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
-  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Thu Oct  8 20:38:14 2026
-    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
-    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
-
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Thu Oct  8 20:38:14 2026
+# Process ID         : 60008
+# Current directory  : C:/Documents/2026 Fall UA/ECE 580/Lab5/Lab5.runs/synth_1
+# Command line       : vivado.exe -log top_fifo_ext.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source top_fifo_ext.tcl
+# Log file           : C:/Documents/2026 Fall UA/ECE 580/Lab5/Lab5.runs/synth_1/top_fifo_ext.vds
+# Journal file       : C:/Documents/2026 Fall UA/ECE 580/Lab5/Lab5.runs/synth_1\vivado.jou
+# Running On         : ASTRID
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26300
+# Processor Detail   : Intel(R) Core(TM) Ultra 9 185H
+# CPU Frequency      : 3072 MHz
+# CPU Physical cores : 16
+# CPU Logical cores  : 22
+# Host memory        : 33777 MB
+# Swap memory        : 58138 MB
+# Total Virtual      : 91915 MB
+# Available Virtual  : 14836 MB
+#-----------------------------------------------------------
 source top_fifo_ext.tcl -notrace
 create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:09 . Memory (MB): peak = 526.578 ; gain = 222.090
 Command: read_checkpoint -auto_incremental -incremental {C:/Documents/2026 Fall UA/ECE 580/Lab5/Lab5.srcs/utils_1/imports/synth_1/fifo_wrapper.dcp}
