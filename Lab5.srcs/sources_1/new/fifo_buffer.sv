@@ -29,7 +29,7 @@ module fifo_buffer #(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
     
     // observers
     
-    ram #(.WIDTH(WIDTH), .DEPTH(DEPTH), .ADDR_WIDTH(ADDR_WIDTH))ram_mod (
+    ram #(.WIDTH(WIDTH), .DEPTH(DEPTH), .ADDR_W(ADDR_WIDTH))ram_mod (
         .clk(clk),
         .rst(rst),
         .wr_en(write),
@@ -40,6 +40,11 @@ module fifo_buffer #(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
         .rd_data(rd_data)
     );
     
+//    If both a read and a write are valid on the same rising edge:
+// both operations must occur,
+// both pointers must advance, and
+// the occupancy count must remain unchanged.
+
     // registers for status and read and write pointers
     always_ff @(posedge clk)
         if (rst) begin
@@ -50,28 +55,25 @@ module fifo_buffer #(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
         else begin
             write_ptr <= write_ptr_next;
             rd_ptr <= rd_ptr_next;
+            count <= count_next;
         end // end else begin
     // next-state logic for read and write
     always_comb begin
+        // default: keep old vals
+        write_ptr_next = write_ptr;
+        rd_ptr_next = rd_ptr;
+        count_next = count;
+        
         //successive pointer values
         if (write_ptr == DEPTH-1)
             write_ptr_succ = '0;
         else
-            write_ptr_succ = write_ptr + 1;
-            
+            write_ptr_succ = write_ptr + 1;    
         if (rd_ptr == DEPTH-1)
             rd_ptr_succ = '0;
         else
             rd_ptr_succ = rd_ptr + 1;
             
-        if (write && !read) // accepted writes increase occupancy unless a valid read also happens
-            count = count + 1;
-        else if (read && !write)
-            count = count -1;
-        
-        // default: keep old vals
-        write_ptr_next = write_ptr;
-        rd_ptr_next = rd_ptr;
         
         // if the fifo is full and both requests asserted:
         // read accepted, write ignored
@@ -80,6 +82,12 @@ module fifo_buffer #(parameter int WIDTH = 8, parameter int DEPTH  = 2)(
             write_ptr_next = write_ptr_succ;
         if(read)
             rd_ptr_next = rd_ptr_succ;
+        // occupancy
+        case ({write, read})
+            2'b10: count_next = count + 1'b1; // write only
+            2'b01: count_next = count - 1'b1; //read only
+            default: count_next =  count;
+        endcase
     end // end always begin
     
     

@@ -13,7 +13,7 @@ module fifo_wrapper (
 
     fifo_buffer #(
         .WIDTH(8),
-        .DEPTH(16)
+        .DEPTH(1024)
     ) fifo_inst (
         .clk(clk),
         .rst(rst),

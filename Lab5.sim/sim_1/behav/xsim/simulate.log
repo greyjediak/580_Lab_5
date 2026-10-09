@@ -1,0 +1,23 @@
+Time resolution is 1 ps
+Test 1
+Test 2
+Test 3
+Test 4
+Test 5
+Test 6
+Test 7
+Test 8
+Test 9
+Test 10
+Test 11
+test 12
+Test 13
+Test 14
+Test 15
+Test 16
+Test 17
+Test 18
+Test 19
+Test 20
+All 20 tests passed.
+$finish called at time : 837 ns : File "C:/Documents/2026 Fall UA/ECE 580/Lab5/Lab5.srcs/sim_1/new/tb_fifo_ext.sv" Line 699
